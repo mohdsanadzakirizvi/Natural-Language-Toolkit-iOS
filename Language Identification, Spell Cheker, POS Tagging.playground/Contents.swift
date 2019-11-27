@@ -24,6 +24,8 @@ func langCheck(){
     
 }
 
+//langCheck()
+
 // Check and suggest the spelling of words in the text
 func spellCheck(){
     let string = """
@@ -69,15 +71,20 @@ func spellCheck(){
     } while true
 }
 
+//spellCheck()
+
 // POS and NER
 func posCheck(){
     let text = "Hello world, I am a data scientist. I work with machine learning!"
-    
+
     // Initialize the tagger
     let tagger = NLTagger(tagSchemes: [.lexicalClass])
+    // Ignore whitespace and punctuation marks
     let options : NLTagger.Options = [.omitWhitespace, .omitPunctuation]
+    // Process the text for POS
     tagger.string = text
-    
+
+    // loop through all the tokens and print their POS tags
     tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange in
         if let tag = tag{
             print("\(text[tokenRange]): \(tag.rawValue)")
